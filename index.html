@@ -33,6 +33,30 @@
       width: 33px;
       height: 33px;
     }
+    .loading-dots {
+      font-size: 2em;
+      animation: pulse 1s infinite;
+    }
+    .dot1 {
+      animation-delay: 0.1s;
+    }
+    .dot2 {
+      animation-delay: 0.2s;
+    }
+    .dot3 {
+      animation-delay: 0.3s;
+    }
+    @keyframes pulse {
+      0% {
+        opacity: 0.2;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.2;
+      }
+    }
   </style>
 </head>
 <body>
@@ -42,6 +66,6 @@
   <a href="https://discord.gg/KqsAYyS3ns" target="_blank">
     <img class="discord-logo" src="discord.svg" alt="Discord Logo" style="right: 23px;">
   </a>
-  <h1>COMING SOON...</h1>
+  <h1>COMING SOON<span class="loading-dots dot1">.</span><span class="loading-dots dot2">.</span><span class="loading-dots dot3">.</span></h1>
 </body>
 </html>

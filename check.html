@@ -69,45 +69,45 @@
   </div>
 
   <script>
- function checkWallet() {
-  var walletAddress = document.getElementById('walletInput').value;
+    function checkWallet() {
+      var walletAddress = document.getElementById('walletInput').value;
 
-  // Проверка наличия кошелька в файле wls.json
-  var xhttpWLS = new XMLHttpRequest();
-  xhttpWLS.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      try {
-        var whitelistData = JSON.parse(this.responseText);
-        if (whitelistData.wallets.includes(walletAddress)) {
-          alert("You are whitelisted");
-          return;
-        }
-        // Если кошелек нет в wls.json, выполняем проверку в ogs.json
-        var xhttpOGS = new XMLHttpRequest();
-        xhttpOGS.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            try {
-              var ogsData = JSON.parse(this.responseText);
-              if (ogsData.wallets.includes(walletAddress)) {
-                alert("You are OG");
-              } else {
-                alert("You are not whitelisted");
-              }
-            } catch (error) {
-              console.error("Error parsing ogs.json: " + error.message);
+      // Проверка наличия кошелька в файле wls.json
+      var xhttpWLS = new XMLHttpRequest();
+      xhttpWLS.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          try {
+            var whitelistData = JSON.parse(this.responseText);
+            if (whitelistData.wallets.includes(walletAddress)) {
+              alert("You are whitelisted");
+              return;
             }
+            // Если кошелек нет в wls.json, выполняем проверку в ogs.json
+            var xhttpOGS = new XMLHttpRequest();
+            xhttpOGS.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                try {
+                  var ogsData = JSON.parse(this.responseText);
+                  if (ogsData.wallets.includes(walletAddress)) {
+                    alert("You are OG");
+                  } else {
+                    alert("You are not whitelisted");
+                  }
+                } catch (error) {
+                  console.error("Error parsing ogs.json: " + error.message);
+                }
+              }
+            };
+            xhttpOGS.open("GET", "ogs.json", true);
+            xhttpOGS.send();
+          } catch (error) {
+            console.error("Error parsing wls.json: " + error.message);
           }
-        };
-        xhttpOGS.open("GET", "ogs.json", true);
-        xhttpOGS.send();
-      } catch (error) {
-        console.error("Error parsing wls.json: " + error.message);
-      }
+        }
+      };
+      xhttpWLS.open("GET", "wls.json", true);
+      xhttpWLS.send();
     }
-  };
-  xhttpWLS.open("GET", "wls.json", true);
-  xhttpWLS.send();
-}
   </script>
 </body>
 </html>

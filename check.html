@@ -69,23 +69,18 @@
   </div>
 
   <script>
-    // Определяем массив кошельков
-    const wallets = ["0x72fD53A35b43d5b78A21c339CAcF696924C57197", "0xFd2a1124ac893CE3c5AA9D2CD1CECF6A9A32e77c", "0xdB4BFC86e5219AdF4D036e804d122C8AdEDA6Fb2", "0xADc5F5Bef93422383F6De8eA9FEf842800075dbd", 0xF315cb65d5C69cF51Be5E9F170964c81F7113A63"];
-    
-    // Функция для проверки наличия кошелька в массиве
-    function isWalletInArray(wallet) {
-      return wallets.includes(wallet);
-    }
-    
-    // Функция для проверки кошелька
-    function checkWallet() {
-      const input = document.getElementById("walletInput").value;
-      const resultMessage = document.getElementById("resultMessage");
-      
-      if (isWalletInArray(input)) {
-        resultMessage.innerText = "You are whitelisted";
+ async function checkWallet() {
+      const walletAddress = document.getElementById('walletInput').value;
+      const response = await fetch('wls.json');
+      if (response.ok) {
+        const wallets = await response.json();
+        if (wallets.includes(walletAddress)) {
+          alert('You are whitelisted');
+        } else {
+          alert('You are not whitelisted');
+        }
       } else {
-        resultMessage.innerText = "You are not whitelisted";
+        alert('Failed to fetch wallet list');
       }
     }
   </script>

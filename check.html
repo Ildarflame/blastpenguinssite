@@ -60,10 +60,23 @@
       cursor: pointer;
       font-weight: bold;
     }
+    
+    button:hover {
+      background-color: #47873e;
+    }
 
     .result {
       margin-top: 20px;
       font-size: 1.5em;
+    }
+    .home-link {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 25px;
+      color: yellow;
+      font-weight: bold;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -76,7 +89,7 @@
     <img class="discord-logo" src="discord.svg" alt="Discord Logo" style="right: 23px;">
   </a>
   <h1>You are PENG?🐧</h1>
-
+  <a href="https://blastpenguins.xyz" class="home-link">🏠</a>
   <div class="input-container">
     <input type="text" id="walletInput" placeholder="Enter wallet address">
     <button onclick="checkWallet()">Check wallet</button>
